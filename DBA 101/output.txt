@@ -1,0 +1,44 @@
+
+NAME	  CREATED   OPEN_MODE		 DATABASE_ROLE
+--------- --------- -------------------- ----------------
+TEST101   17-JAN-24 READ WRITE		 PRIMARY
+
+
+VERSION_FULL	  STATUS       DATABASE_STATUS	 INSTANCE_ROLE
+----------------- ------------ ----------------- ------------------
+19.3.0.0.0	  OPEN	       ACTIVE		 PRIMARY_INSTANCE
+
+
+no rows selected
+
+
+GRANTEE 	     GRANTED_ROLE    ADM DEL DEF COM INH
+-------------------- --------------- --- --- --- --- ---
+SYS		     DBA	     YES NO  YES YES NO
+SYSTEM		     DBA	     NO  NO  YES YES NO
+ADMIN		     DBA	     NO  NO  YES YES NO
+
+
+GRANTEE 	     GRANTED_ROLE    ADM DEL DEF COM INH
+-------------------- --------------- --- --- --- --- ---
+FINAL_USER	     CONNECT	     NO  NO  YES YES NO
+
+
+GRANTEE 	     PRIVILEGE				      ADM COM INH
+-------------------- ---------------------------------------- --- --- ---
+FINAL_USER	     CREATE TABLE			      NO  NO  NO
+FINAL_USER	     CREATE TABLE			      NO  YES NO
+FINAL_USER	     CREATE PROCEDURE			      NO  YES NO
+FINAL_USER	     CREATE SESSION			      NO  YES NO
+
+ Name																     Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------
+ ID																	      NUMBER(38)
+ NAME																	      VARCHAR2(20)
+ BALANCE																      FLOAT(126)
+
+
+	ID NAME 		   BALANCE
+---------- -------------------- ----------
+	 1 Siyovush		 1000000.1
+

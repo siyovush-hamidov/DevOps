@@ -1,0 +1,9 @@
+#datafiles
+/u01/app/oracle/oradata/test101/*.dbf
+
+#contol files
+/u01/app/oracle/oradata/test101/*.ctl
+
+#param files
+/u01/app/oracle/product/19.0.0/dbhome_1/dbs/*.ora
+
