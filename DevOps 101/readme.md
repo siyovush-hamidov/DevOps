@@ -1,7 +1,7 @@
 # Script.sh
-- [Задание 5 из прошлого ДЗ][##script.sh]
-- [Скрипт для final 1][##final1.sh]
-- [Скрипт для бэкап 2][##final2.sh]
+- [Задание 5 из прошлого ДЗ][#script.sh]
+- [Скрипт для final 1][#final1.sh]
+- [Скрипт для бэкап 2][#final2.sh]
 
 ## script.sh
 ```js
