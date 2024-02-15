@@ -1,9 +1,9 @@
 # Script.sh
-## Задание 5 из прошлого ДЗ[script.sh]
-## final1.sh[final1.sh]
-## final2.sh[final2.sh]
+- Задание 5 из прошлого ДЗ[##script.sh]
+- final1.sh[##final1.sh]
+- final2.sh[##final2.sh]
 
-### script.sh
+## script.sh
 ```js
 #!/bin/bash
 
@@ -48,8 +48,8 @@ EXIT;
 EOF
 ```
 
-# final.sh
-## бэкап 
+## final.sh
+### бэкап 
 ```js
 #!/bin/bash
 
@@ -71,8 +71,8 @@ current_time=$(date '+%Y-%m-%d_%H-%M-%S')
 #backup
 expdp final1/final1@test101 schemas=final1 directory=data_pump_1 dumpfile=final_1_$current_time.dmp logfile=final_1_$current_time.log
 ```
-# final2.sh
-## бэкап2
+## final2.sh
+### бэкап2
 ```js
 #!/bin/bash
 # change the ORALCE_SID
