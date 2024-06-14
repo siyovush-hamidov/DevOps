@@ -1,0 +1,4 @@
+#!/bin/bash
+read dir
+sudo chown -R user1:lab_group $dir
+sudo chmod -R 764 $dir

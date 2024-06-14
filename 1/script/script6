@@ -1,0 +1,5 @@
+#!/bin/bash
+read dir
+read backup_directory
+backup_name="$(basename $dir)_backup_$(date +%Y%m%d).tar.gz"
+sudo tar -czf $backup_directory/$backup_name $dir

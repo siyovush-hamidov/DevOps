@@ -1,0 +1,13 @@
+#!/bin/bash
+read file
+if [ -e $file ]; then
+	echo "File exists"
+	if [ -d $file ]; then
+		echo "It is a directory"
+	else
+		echo "It is a simple file"
+	fi
+	ls -l $file
+else
+	echo "File does not exist"
+fi

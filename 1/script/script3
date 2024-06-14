@@ -1,0 +1,4 @@
+#!/bin/bash
+read input_file
+output_file="${input_file%.*}_sorted.txt"
+sort $input_file > $output_file

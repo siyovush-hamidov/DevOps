@@ -1,0 +1,119 @@
+[Siyovush@localhost ~]$ mkdir lab1
+[Siyovush@localhost ~]$ cd lab1/
+[Siyovush@localhost lab1]$ touch file1.txt
+[Siyovush@localhost lab1]$ touch file2.txt
+[Siyovush@localhost lab1]$ touch file3.txt
+[Siyovush@localhost lab1]$ chmod 644 file1.txt 
+[Siyovush@localhost lab1]$ ls -l
+total 0
+-rw-r--r--. 1 Siyovush Siyovush 0 Jun 13 22:40 file1.txt
+-rw-rw-r--. 1 Siyovush Siyovush 0 Jun 13 22:40 file2.txt
+-rw-rw-r--. 1 Siyovush Siyovush 0 Jun 13 22:40 file3.txt
+[Siyovush@localhost lab1]$ chmod 600 file1.txt 
+[Siyovush@localhost lab1]$ ls -l
+total 0
+-rw-------. 1 Siyovush Siyovush 0 Jun 13 22:40 file1.txt
+-rw-rw-r--. 1 Siyovush Siyovush 0 Jun 13 22:40 file2.txt
+-rw-rw-r--. 1 Siyovush Siyovush 0 Jun 13 22:40 file3.txt
+[Siyovush@localhost lab1]$ chmod 660 file2.txt 
+[Siyovush@localhost lab1]$ chmod 644 file3.txt 
+[Siyovush@localhost lab1]$ ls -l
+total 0
+-rw-------. 1 Siyovush Siyovush 0 Jun 13 22:40 file1.txt
+-rw-rw----. 1 Siyovush Siyovush 0 Jun 13 22:40 file2.txt
+-rw-r--r--. 1 Siyovush Siyovush 0 Jun 13 22:40 file3.txt
+[Siyovush@localhost lab1]$ groupadd lab_group
+groupadd: Permission denied.
+groupadd: cannot lock /etc/group; try again later.
+[Siyovush@localhost lab1]$ sudo groupadd lab_group
+[sudo] password for Siyovush: 
+[Siyovush@localhost lab1]$ sudo usermod -aG lab_group $USER
+[Siyovush@localhost lab1]$ sudo chgrp -R lab_group ~/lab1
+[Siyovush@localhost lab1]$ ls -l
+total 0
+-rw-------. 1 Siyovush lab_group 0 Jun 13 22:40 file1.txt
+-rw-rw----. 1 Siyovush lab_group 0 Jun 13 22:40 file2.txt
+-rw-r--r--. 1 Siyovush lab_group 0 Jun 13 22:40 file3.txt
+[Siyovush@localhost lab1]$ cd !
+bash: cd: !: No such file or directory
+[Siyovush@localhost lab1]$ cd 
+[Siyovush@localhost ~]$ pwd
+/home/Siyovush
+[Siyovush@localhost ~]$ mkdir ~/lab2
+[Siyovush@localhost ~]$ cd lab2
+[Siyovush@localhost lab2]$ ls
+[Siyovush@localhost lab2]$ echo -e "a1\na2\na3\na4\na5\na6" > input.txt
+[Siyovush@localhost lab2]$ ls > directory_list.txt
+[Siyovush@localhost lab2]$ date >> directory_list.txt 
+[Siyovush@localhost lab2]$ cat directory_list.txt 
+directory_list.txt
+input.txt
+Thu Jun 13 22:54:41 +05 2024
+[Siyovush@localhost lab2]$ cat input.txt 
+a1
+a2
+a3
+a4
+a5
+a6
+[Siyovush@localhost lab2]$ sort input.txt
+a1
+a2
+a3
+a4
+a5
+a6
+[Siyovush@localhost lab2]$ grep 'a' input.txt
+a1
+a2
+a3
+a4
+a5
+a6
+[Siyovush@localhost lab2]$ wc-l input.txt
+bash: wc-l: command not found...
+[Siyovush@localhost lab2]$ wc -l input.txt
+6 input.txt
+[Siyovush@localhost lab2]$ sort input.txt | grep 'a' | wc -l
+6
+[Siyovush@localhost lab2]$ sort input.txt | grep '1' | wc -l
+1
+[Siyovush@localhost lab2]$ ls doesnt_exist 2> errors.txt
+[Siyovush@localhost lab2]$ cat errors.txt 
+ls: cannot access doesnt_exist: No such file or directory
+[Siyovush@localhost lab2]$ touch script1.sh
+[Siyovush@localhost lab2]$ nano script1.sh 
+[Siyovush@localhost lab2]$ ./script1.sh
+bash: ./script1.sh: Permission denied
+[Siyovush@localhost lab2]$ sudo ./script1.sh
+[sudo] password for Siyovush: 
+sudo: ./script1.sh: command not found
+[Siyovush@localhost lab2]$ ls
+directory_list.txt  errors.txt  input.txt  script1.sh
+[Siyovush@localhost lab2]$ ls -l
+total 16
+-rw-rw-r--. 1 Siyovush Siyovush 58 Jun 13 22:54 directory_list.txt
+-rw-rw-r--. 1 Siyovush Siyovush 58 Jun 13 22:57 errors.txt
+-rw-rw-r--. 1 Siyovush Siyovush 18 Jun 13 22:54 input.txt
+-rw-rw-r--. 1 Siyovush Siyovush 67 Jun 13 23:00 script1.sh
+[Siyovush@localhost lab2]$ sc
+scanimage           scriptreplay        scsi_start
+scl                 scsi_logging_level  scsi_stop
+scl_enabled         scsi_mandat         scsi_temperature
+scl_source          scsi_readcap        sctp_darn
+scp                 scsi_ready          sctp_status
+scp-dbus-service    scsi-rescan         sctp_test
+script              scsi_satl           
+[Siyovush@localhost lab2]$ sudo chmod 744 script1.sh
+[Siyovush@localhost lab2]$ sudo ./script1.sh
+Enter your name:
+ha
+Hello, ha!
+[Siyovush@localhost lab2]$ nano script2
+[Siyovush@localhost lab2]$ nano script2
+[Siyovush@localhost lab2]$ nano script3
+[Siyovush@localhost lab2]$ nano script4
+[Siyovush@localhost lab2]$ nano script5
+[Siyovush@localhost lab2]$ nano script6
+[Siyovush@localhost lab2]$ 
+
