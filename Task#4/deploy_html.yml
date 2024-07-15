@@ -1,0 +1,15 @@
+---
+- name: Deploy HTML page to web servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy HTML file to Nginx web server directory
+      ansible.builtin.copy:
+        src: /home/ubuntu/cmt/index.html
+        dest: /usr/share/nginx/html/index.html
+
+    - name: Ensure Nginx is running
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes

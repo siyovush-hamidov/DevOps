@@ -1,0 +1,7 @@
+[ec2_servers]
+ubuntu_1 ansible_host=13.233.158.58
+ubuntu_2 ansible_host=13.201.228.23
+
+[ec2_servers:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=/home/ubuntu/cmt/ubuntu_key.pem

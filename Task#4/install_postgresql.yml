@@ -1,0 +1,31 @@
+---
+- name: Install PostgreSQL and create database and user
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install PostgreSQL on Debian-based systems
+      ansible.builtin.apt:
+        name: postgresql
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Start and enable PostgreSQL service
+      ansible.builtin.service:
+        name: postgresql
+        state: started
+        enabled: yes
+
+    - name: Create PostgreSQL database
+      become_user: postgres
+      ansible.builtin.postgresql_db:
+        name: mydatabase
+        state: present
+
+    - name: Create PostgreSQL user
+      become_user: postgres
+      ansible.builtin.postgresql_user:
+        name: oscar
+        password: mypassword
+        state: present
+        login_host: localhost
