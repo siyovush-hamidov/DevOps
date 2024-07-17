@@ -1,17 +1,17 @@
 ---
-- name: Install and start Nginx web server
-  hosts: all
-  become: yes
+- name: Install and start Nginx web server # Здесь мы задаём название сценарию(play-у)
+  hosts: all # для всех хостов в файле hosts(inventory)
+  become: yes # нужно чтобы всё выполнялось от рута
 
-  tasks:
-    - name: Install Nginx
-      apt:
-        name: nginx
-        state: present
-        update_cache: yes
+  tasks: # эта строка объявляет контейнер задач
+    - name: Install Nginx # имя задачи
+      apt: # указано чтобы использовался менеджер загрузки apt 
+        name: nginx # имя пакета
+        state: present # пакет должен быть установлен
+        update_cache: yes # это как sudo apt update
 
-    - name: Ensure Nginx is enabled and running
-      systemd:
+    - name: Ensure Nginx is enabled and running 
+      systemd: # мы обращаемся к менеджеру служб для управления системой и службами
         name: nginx
-        enabled: yes
-        state: started
+        enabled: yes # мы тут включаем службу при загрузке системы
+        state: started # запуск службы

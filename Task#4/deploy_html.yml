@@ -4,12 +4,12 @@
   become: yes
   tasks:
     - name: Copy HTML file to Nginx web server directory
-      ansible.builtin.copy:
-        src: /home/ubuntu/cmt/index.html
-        dest: /usr/share/nginx/html/index.html
+      ansible.builtin.copy: # обращаемся к модулю для копирования файлов
+        src: /home/ubuntu/cmt/index.html # что и откуда в локальной машине
+        dest: /usr/share/nginx/html/index.html # место в удаленной машине
 
     - name: Ensure Nginx is running
-      ansible.builtin.service:
+      ansible.builtin.service: # аналог systemd.
         name: nginx
         state: started
         enabled: yes

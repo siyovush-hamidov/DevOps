@@ -3,7 +3,7 @@
   hosts: all
   become: yes
 
-  vars:
+  vars: # так объявляются глобальные переменные для этого playbook
     db_user: oscar
     db_pass: database
     db_name: database
@@ -23,7 +23,7 @@
         state: started
 
     - name: Ensure PostgreSQL is running
-      service:
+      service: # информативынй модуль для работы со службами 
         name: postgresql
         state: started
 
@@ -33,25 +33,31 @@
         state: present
 
     - name: Get PostgreSQL version
-      command: psql --version
-      register: psql_version_output
+      command: psql --version # команда для выполнения в терминале
+      register: psql_version_output # так сохраняется вывод этой команды в переменную psql_version_output
 
     - name: Set PostgreSQL version fact
-      set_fact:
+      set_fact: # модуль использующий boolean, который позволяет устанавливать переменные
         postgresql_version: "{{ psql_version_output.stdout.split(' ')[2].split('.')[0] }}"
+      # psql_version_output.stdout.split(' ') сохраняет вывод вида psql (PostgreSQL) 15.5
+      # в таком формате ['psql', '(PostgreSQL)', '15.5']
+      # чтобы получить третий элемент, достаем его по индексу [2] и делим его точкой полчаем 15, 5,
+      # достаём отсюда первый элемент по индексу [0]
+
 
     - name: Backup the original pg_hba.conf
-      copy:
+      copy: # то же самое что и ansible.builtin.copy
         src: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
         dest: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf.bak"
-        remote_src: yes
+        remote_src: yes # указывает на то что исходник находится в удаленной машине
 
     - name: Update pg_hba.conf to use trust authentication for local
-      lineinfile:
+      lineinfile: # нужен для манипуляции строками в файле
         path: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
-        regexp: '^local.*all.*all.*'
-        line: 'local   all             all                                     trust'
-        insertafter: '^# "local" is for Unix domain socket connections only'
+        regexp: '^local.*all.*all.*' # регулярное выражение для поиска строк
+        # я поставил trust потому что заколебался с этими паролями :(
+        line: 'local   all             all                                     trust' #строка которуб надо вставить
+        insertafter: '^# "local" is for Unix domain socket connections only' # вставляет строку после этого комментария
 
     - name: Update pg_hba.conf to use trust authentication for IPv4
       lineinfile:
@@ -71,14 +77,14 @@
       lineinfile:
         path: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
         line: 'host    samerole       all             0.0.0.0/0               trust'
-        state: present
-        insertafter: EOF
+        state: present # если строки нет, то он вставляет ее
+        insertafter: EOF # Это вставляет строку в конец файла
 
     - name: Update postgresql.conf to listen on all addresses
-      replace:
+      replace: # модуль для замены строк в файле
         path: "/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf"
-        regexp: "^#listen_addresses = '\\*' # what IP address\\(es\\) to listen on;"
-        replace: "listen_addresses = '*' \n# what IP address(es) to listen on;"
+        regexp: "^#listen_addresses = '\\*' # what IP address\\(es\\) to listen on;" # Ищем это и заменяем
+        replace: "listen_addresses = '*' \n# what IP address(es) to listen on;" # На это
 
     - name: Restart PostgreSQL to apply changes
       systemd:
@@ -86,13 +92,13 @@
         state: restarted
 
     - name: Set password for postgres user
-      postgresql_user:
+      postgresql_user: # модуль для управления пользователями в postgresql
         name: postgres
-        password: "{{ postgres_password }}"
-        role_attr_flags: "SUPERUSER"
+        password: "{{ postgres_password }}" # пароль пользователя
+        role_attr_flags: "SUPERUSER" # присваиваем суперюзер
         state: present
         login_user: postgres
-        login_password: "{{ postgres_password }}"
+        login_password: "{{ postgres_password }}" # пароль для подключения
 
     - name: Create PostgreSQL user
       postgresql_user:
@@ -103,7 +109,7 @@
         login_password: "{{ postgres_password }}"
 
     - name: Create PostgreSQL database
-      postgresql_db:
+      postgresql_db: # то же самое но уже для работы с базами данных, а не пользователями
         name: "{{ db_name }}"
         owner: "{{ db_user }}"
         state: present
